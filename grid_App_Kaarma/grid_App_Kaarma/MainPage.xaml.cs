@@ -58,7 +58,7 @@ namespace grid_App_Kaarma
                         else
                         {
                             box.Color = new Color(355, 0, 0);
-                        }
+                        } // Создать крестик нолик 
                     };   
 
             }
