@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="grid_App_Kaarma.krest">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150" />
+                <RowDefinition Height="150" />
+                <RowDefinition Height="150" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <BoxView Color="Green" />
+            <Label Text="Row 0, Column 0"
+               HorizontalOptions="Start"
+               VerticalOptions="Start" />
+            <BoxView Grid.Row="1" Color="red" />
+            <Label Text="Row 1, Column 0"
+               HorizontalOptions="Start" 
+               VerticalOptions="Center" />
+            <BoxView Grid.Row="2" Color="blue" />
+            <Label Text="Row 2, Column 0"
+               HorizontalOptions="Start"
+               VerticalOptions="End" />
+            <BoxView Grid.Column="1" Color="Red"  />
+            <Label Text="Row 1, Column 1"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+            <BoxView Grid.Row="1" Grid.Column="1" Color="Green" />
+            <Label Text="Row 1, Column 1"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+            <BoxView Grid.Row="2" Grid.Column="1" Color="blue" />
+            <Label Text="Row 2, Column 1"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+            <BoxView Grid.Column="2" Color="blue" />
+            <Label Text="Row 0, Column 2"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+            <BoxView Grid.Row="1" Grid.Column="2" Color="red" />
+            <Label Text="Row 1, Column 2"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+            <BoxView Grid.Row="2" Grid.Column="2" Color="Green" />
+            <Label Text="Row 2, Column 2"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+            <AbsoluteLayout>
+            <Button
+            Text="Сбросить"
+            TranslationX="0"
+            TranslationY="720"
+            Clicked="Button_Clicked">
+            </Button>
+    </AbsoluteLayout>
+        </Grid>
+    </ContentPage.Content>
+    
+</ContentPage>

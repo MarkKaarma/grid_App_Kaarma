@@ -12,29 +12,15 @@ namespace grid_App_Kaarma
     public partial class MainPage : ContentPage
     {
         BoxView box;
+        Button new_game, random_player;
         public MainPage()
         {
-            /*Grid grid = new Grid
-            {
-                RowDefinitions =
-                {
-                    new RowDefinition{Height=new GridLength(1,GridUnitType.Star)},
-                    new RowDefinition{Height=new GridLength(1,GridUnitType.Star)},
-                    new RowDefinition{Height=new GridLength(1,GridUnitType.Star)},
-                    new RowDefinition{Height=new GridLength(1,GridUnitType.Star)},
-                    new RowDefinition{Height=new GridLength(1,GridUnitType.Star)}
-                }
-                ColumnDefinitions =
-                {
-                    new ColumnDefinition{Width=new GridLength(1,GridUnitType.Star)},
-                    new ColumnDefinition{Width=new GridLength(1,GridUnitType.Star)},
-                    new ColumnDefinition{Width=new GridLength(1,GridUnitType.Star)},
-                    new ColumnDefinition{Width=new GridLength(1,GridUnitType.Star)},
-                    new ColumnDefinition{Width=new GridLength(1,GridUnitType.Star)}
-                }
-            };*/
-            Grid grid = new Grid(); // Цикл, что бы не было, как выше.
-            for (int i = 0; i < 3; i++)
+            New_Game_Clicked();
+        }
+        void New_Game_Clicked()
+        {
+            Grid grid = new Grid(); // Цикл что бы не расписывать, как в xaml 
+            for (int i = 0; i < 4; i++)
             {
                 grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
                 grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
@@ -43,37 +29,29 @@ namespace grid_App_Kaarma
             {
                 for (int j = 0; j < 3; j++)
                 {
-                   box=new BoxView { Color=Color.FromRgb(355,0,124)};
+                    box = new BoxView { Color = Color.FromRgb(355, 0, 124) };
                     grid.Children.Add(box, i, j);
                     var tap = new TapGestureRecognizer();
-                    //tap.Tapped += Tap_Tapped;
                     box.GestureRecognizers.Add(tap);
-                    tap.Tapped += async (object sender, EventArgs e) =>
-                    {
-                        BoxView box = sender as BoxView;
-                        if (box.Color == new Color(355, 0, 0))
-                        {
-                            box.Color = Color.FromRgb(355, 0, 124);
-                        }
-                        else
-                        {
-                            box.Color = new Color(355, 0, 0);
-                        } // Создать крестик нолик 
-                    };   
-
+                    tap.Tapped += Tap_Tapped;
+                }
             }
-
-            }
-
+            new_game = new Button { Text = "Обнулить" };
+            grid.Children.Add(new_game, 0, 3);
+            Grid.SetColumnSpan(new_game, 2);
+            random_player = new Button { Text = "Крестик или нолик?" };
+            grid.Children.Add(random_player, 2, 3);
+            Grid.SetColumnSpan(random_player, 2);
             Content = grid;
         }
 
 
-        /*private void Tap_Tapped(object sender, EventArgs e)
+        private void Tap_Tapped(object sender, EventArgs e)
         {
             BoxView box = sender as BoxView;
-            box.Color = Color.Azure;
-
-        }*/
+            box.Color = Color.Black;
+        }
     }
+
 }
+
