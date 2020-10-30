@@ -2,88 +2,81 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.Markup;
 
-namespace Grid_App
+namespace grid_App_Kaarma
 {
     public partial class MainPage : ContentPage
     {
-        //BoxView box;
-        BoxView[,] boxs = new BoxView[5, 5];
-        int i, j;
-        Image img;
+        BoxView box;
+        Button new_game;
         public MainPage()
         {
-            /* Grid grid = new Grid
-            {
-                RowDefinitions =
-                {
-                    new RowDefinition{Height=new GridLength(1,GridUnitType.Star)},
-                    new RowDefinition{Height=new GridLength(1,GridUnitType.Star)},
-                    new RowDefinition{Height=new GridLength(1,GridUnitType.Star)},
-                    new RowDefinition{Height=new GridLength(1,GridUnitType.Star)},
-                    new RowDefinition{Height=new GridLength(1,GridUnitType.Star)}
-                },
-                ColumnDefinitions =
-                {
-                    new ColumnDefinition{Width=new GridLength(1,GridUnitType.Star)},
-                    new ColumnDefinition{Width=new GridLength(1,GridUnitType.Star)},
-                    new ColumnDefinition{Width=new GridLength(1,GridUnitType.Star)},
-                    new ColumnDefinition{Width=new GridLength(1,GridUnitType.Star)},
-                    new ColumnDefinition{Width=new GridLength(1,GridUnitType.Star)}
-                }
-            }; */
-            Grid grid = new Grid();
-            for (int i = 0; i < 5; i++)
+            New_Game_Clicked();
+        }
+        Grid grid = new Grid();
+        void New_Game_Clicked()
+        {
+            // Цикл что бы не расписывать, как в xaml 
+            for (int i = 0; i < 4; i++)
             {
                 grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
                 grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             }
-            for (i = 0; i < 5; i++)
+            for (int i = 0; i < 3; i++)
             {
-                for (j = 0; j < 5; j++)
+                for (int j = 0; j < 3; j++)
                 {
-                    //boxs[i,j] = new BoxView { Color = Color.FromRgb(200, 100, 50) };//box->array
-                    img = new Image { Source=ImageSource.FromFile("nolik.png")};
-
-                    //grid.Children.Add(boxs[i,j], i, j
-                    grid.Children.Add(img, i, j);
+                    box = new BoxView { Color = Color.FromRgb(355, 0, 124) };
+                    grid.Children.Add(box, i, j);
                     var tap = new TapGestureRecognizer();
-                    //tap.Tapped += Tap_Tapped;
-                    //boxs[i,j].GestureRecognizers.Add(tap);
-                    img.GestureRecognizers.Add(tap);
-                    tap.Tapped += async (object sender, EventArgs e) =>
-                     {
-                    //BoxView box = sender as BoxView;
-                    //if (box.Color==new Color(0,0,0))
-                    //{
-                    //    box.Color = Color.FromRgb(200, 100, 50);
-                    //}
-                    //else
-                    //{
-                    //    box.Color = new Color(0, 0, 0);
-                    //}
-                    Image img = sender as Image;
-                    if (img.Source==ImageSource.FromFile("nolik.png"))
-                    {
-                        img.Source = ImageSource.FromFile("krestik.png");
-                    }
-                    else
-                    {
-                        img.Source = ImageSource.FromFile("nolik.png");
-                    }
-                    };
+                    box.GestureRecognizers.Add(tap);
+                    tap.Tapped += Tap_Tapped;
+                    //tap.Tapped += Tap_Tapped1;
                 }
             }
+            new_game = new Button { Text = "Обнулить" };
+            grid.Children.Add(new_game, 0, 3);
+            Grid.SetColumnSpan(new_game, 2);
+            new_game.Clicked += New_game_Clicked;
             Content = grid;
         }
-        //private void Tap_Tapped(object sender, EventArgs e)
-        //{
-        //    BoxView box = sender as BoxView;
-        //    box.Color = Color.FromRgb(0, 0, 0);
-        //}
+
+        private void New_game_Clicked(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 3; i++)
+                for (int j = 0; j < 3; j++)
+                {
+                    box = new BoxView { Color = Color.FromRgb(355, 0, 124) };
+                    var tap = new TapGestureRecognizer();
+                    box.GestureRecognizers.Add(tap);
+                    grid.Children.Add(box, i, j);
+                    tap.Tapped += Tap_Tapped;
+                }
+        }
+
+        /*private void Tap_Tapped1(object sender, EventArgs e)
+        {
+            BoxView box = sender as BoxView;
+            box.Color = Color.Aqua;
+        }*/
+        Random rnd = new Random();
+        private void Tap_Tapped(object sender, EventArgs e)
+        {
+            BoxView box = sender as BoxView;
+            int c = rnd.Next(1, 3);
+            if (c == 1)
+            {
+                box.Color = Color.Black;
+            }
+            else if (c == 2)
+            {
+                box.Color = Color.Blue;
+            }
+        }
     }
+
 }
