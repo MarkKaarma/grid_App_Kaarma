@@ -13,6 +13,7 @@ namespace grid_App_Kaarma
     {
         BoxView box;
         Button new_game;
+        bool turn = true;
         public MainPage()
         {
             New_Game_Clicked();
@@ -63,19 +64,21 @@ namespace grid_App_Kaarma
             BoxView box = sender as BoxView;
             box.Color = Color.Aqua;
         }*/
-        Random rnd = new Random();
         private void Tap_Tapped(object sender, EventArgs e)
         {
             BoxView box = sender as BoxView;
-            int c = rnd.Next(1, 3);
-            if (c == 1)
+            
+            if (turn)
             {
+               
                 box.Color = Color.Black;
             }
-            else if (c == 2)
+            else
             {
+
                 box.Color = Color.Blue;
             }
+            turn = !turn;
         }
     }
 
